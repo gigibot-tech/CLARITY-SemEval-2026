@@ -1,0 +1,93 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.venv_ensemble/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+
+# Environment and secrets
+.env
+.env.local
+*.pem
+.env.*.local
+
+# Hugging Face / transformers
+.hf_cache/
+.cache/
+
+# ML / training outputs (project-specific)
+results/
+reports_acl_submission/colab_outputs/
+roberta/roberta-ensemble-model-*/
+granite_clarity_finetuned/
+granite_clarity_finetuned_*/
+*.safetensors
+*.bin
+checkpoint-*/
+final_model/
+best_model/
+merged_full_model/
+
+# Large or generated data (optional: uncomment if you don’t want to track)
+# *.jsonl
+# RationaleTraining_raw.jsonl
+# qevasion_rationale*.csv
+# rationale_from_jsonl_for_training.csv
+
+# Logs and temp
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
