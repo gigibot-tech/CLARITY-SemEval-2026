@@ -9,6 +9,10 @@ Train Granite 3.2 on rationale dataset for CLARITY.
 
 Device support (single backend per run):
 - GPU (CUDA): default; supports --load-8bit and device_map.
+  Multi-GPU: (1) Single process (e.g. notebook): device_map="auto" spreads the model across
+  GPUs (model parallelism). (2) Data parallelism: run with
+  `accelerate launch --num_processes=2 train_granite_rationale.py ...` (e.g. Kaggle dual T4);
+  do not use device_map in that case (Trainer uses DDP). PyTorch Lightning not required.
 - TPU (Colab/Cloud): auto-detected when torch_xla is installed and COLAB_TPU_ADDR is set
   or XLA world size >= 1. Uses bfloat16 + LoRA; 8-bit and device_map disabled.
 - MPS/CPU: fallback; 8-bit disabled.
@@ -355,10 +359,13 @@ except Exception:
 
 
 def get_device():
-    """Return the best available device: TPU > CUDA > MPS > CPU."""
+    """Return the best available device: TPU > CUDA > MPS > CPU. In distributed runs, use LOCAL_RANK for CUDA."""
     if _TPU_AVAILABLE and _xla_device is not None:
         return _xla_device
     if torch.cuda.is_available():
+        local_rank = os.environ.get("LOCAL_RANK", "")
+        if local_rank != "":
+            return torch.device("cuda", int(local_rank))
         return torch.device("cuda")
     if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
         return torch.device("mps")
@@ -367,6 +374,11 @@ def get_device():
 
 def is_tpu():
     return _TPU_AVAILABLE
+
+
+def is_distributed():
+    """True when launched with accelerate/torchrun (multi-process); then we must not use device_map so Trainer can use DDP."""
+    return os.environ.get("RANK", "") != "" or os.environ.get("LOCAL_RANK", "") != ""
 
 
 def is_cuda():
@@ -701,23 +713,36 @@ def main():
         model = AutoModelForCausalLM.from_pretrained(model_name, **load_kwargs)
         model = model.to(device)
     else:
-        load_kwargs = {
-            "torch_dtype": "auto",
-            "device_map": "auto",
-        }
         use_8bit = getattr(args, "load_8bit", False)
         # 8-bit on Mac (MPS/CPU) causes bitsandbytes shape/index errors; use 8-bit only on CUDA
         if use_8bit and not torch.cuda.is_available():
             print("--load-8bit skipped on non-CUDA (Mac/CPU); using full precision + LoRA to avoid bitsandbytes errors.", flush=True)
             use_8bit = False
-        if use_8bit:
-            try:
-                from transformers import BitsAndBytesConfig
-                load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
-                load_kwargs["device_map"] = "auto"
-            except Exception:
-                use_8bit = False
-        model = AutoModelForCausalLM.from_pretrained(model_name, **load_kwargs)
+        # Distributed (accelerate launch): no device_map so Trainer can use DDP; each process uses one GPU.
+        if is_distributed():
+            load_kwargs = {"torch_dtype": "auto"}
+            if use_8bit:
+                try:
+                    from transformers import BitsAndBytesConfig
+                    load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
+                except Exception:
+                    use_8bit = False
+            model = AutoModelForCausalLM.from_pretrained(model_name, **load_kwargs)
+            model = model.to(device)
+            print("Multi-GPU (DDP): model loaded on current process device (no device_map).", flush=True)
+        else:
+            load_kwargs = {
+                "torch_dtype": "auto",
+                "device_map": "auto",
+            }
+            if use_8bit:
+                try:
+                    from transformers import BitsAndBytesConfig
+                    load_kwargs["quantization_config"] = BitsAndBytesConfig(load_in_8bit=True)
+                    load_kwargs["device_map"] = "auto"
+                except Exception:
+                    use_8bit = False
+            model = AutoModelForCausalLM.from_pretrained(model_name, **load_kwargs)
     # Apply LoRA when user asked for --load-8bit (saves memory; on TPU we still use LoRA for efficiency)
     use_lora = getattr(args, "load_8bit", False) or is_tpu()
     if use_lora:
@@ -738,12 +763,17 @@ def main():
                 "PEFT/LoRA required for --load-8bit (pip install peft). "
                 "Install it or run without --load-8bit for full fine-tuning."
             ) from e
-    # 8-bit + gradient checkpointing triggers bitsandbytes errors on Mac/CPU; disable GC when using 8-bit
-    enable_gradient_checkpointing = getattr(args, "gradient_checkpointing", True) and not use_8bit
+    # 8-bit + gradient checkpointing can trigger bitsandbytes errors on Mac/CPU; enable GC for 8-bit on CUDA only (saves activation memory)
+    enable_gradient_checkpointing = (
+        getattr(args, "gradient_checkpointing", True)
+        and (not use_8bit or (use_8bit and torch.cuda.is_available()))
+    )
     if enable_gradient_checkpointing:
         model.gradient_checkpointing_enable()
         if hasattr(model, "enable_input_require_grads"):
             model.enable_input_require_grads()
+        if use_8bit:
+            print("Gradient checkpointing enabled (8-bit + CUDA) to reduce activation memory.", flush=True)
     elif use_8bit:
         print("Gradient checkpointing disabled with 8-bit to avoid bitsandbytes errors on this device.", flush=True)
 
