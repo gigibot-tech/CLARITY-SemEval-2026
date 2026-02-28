@@ -105,6 +105,7 @@
             <div class="is-size-6" style="margin-top: 1rem;">
               <a href="#overview" style="margin: 0 0.5rem; color: #3273dc;">Overview</a> |
               <a href="#tasks" style="margin: 0 0.5rem; color: #3273dc;">Tasks & Evaluation</a> |
+              <a href="#leaderboard" style="margin: 0 0.5rem; color: #3273dc;">Leaderboard</a> |
               <a href="#timeline" style="margin: 0 0.5rem; color: #3273dc;">Timeline</a> |
               <a href="#faq" style="margin: 0 0.5rem; color: #3273dc;">FAQ</a> |
               <a href="#BibTeX" style="margin: 0 0.5rem; color: #3273dc;">Cite</a>
@@ -287,20 +288,648 @@
     <div class="hero-body">
       <div class="container">
         <!-- Paper video. -->
+        <h2 class="title is-3" style="text-align: center;" id="leaderboard">Leaderboard</h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-three-fifths">
+            <style type="text/css">
+  .ritz .waffle a {
+    color: inherit;
+  }
+
+  .ritz .waffle .s1 {
+    background-color: #ffffff;
+    text-align: center;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+    min-width: 100px;
+  }
+
+  .ritz .waffle .s0 {
+    background-color: #5b95f9;
+    text-align: center;
+    font-weight: bold;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+  }
+
+  .ritz .waffle .s4 {
+    background-color: #e8f0fe;
+    text-align: left;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+  }
+
+  .ritz .waffle .s3 {
+    background-color: #e8f0fe;
+    text-align: center;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+  }
+
+  .ritz .waffle .s2 {
+    background-color: #ffffff;
+    text-align: left;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+    width: 100%;
+  }
+
+  /* Tab styles */
+  .tab-container {
+    width: 100%;
+    font-family: Arial, sans-serif;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid #5b95f9;
+    margin-bottom: 10px;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s;
+  }
+
+  .tab-button:hover {
+    background-color: #e0e0e0;
+  }
+
+  .tab-button.active {
+    background-color: #5b95f9;
+    color: white;
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  /* Scrollable table container */
+  .table-wrapper {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+  }
+</style>
+
+<div class="tab-container">
+  <div class="tabs">
+    <button class="tab-button active" onclick="openTab(event, 'task-1')">Task 1</button>
+    <button class="tab-button" onclick="openTab(event, 'task-2')">Task 2</button>
+  </div>
+
+  <div id="task-1" class="tab-content active">
+    <div class="table-wrapper">
+      <div class="ritz grid-container" dir="ltr">
+  <table class="waffle" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr style="height: 20px">
+        <td class="s0" dir="ltr">Rank</td>
+        <td class="s0">Participant</td>
+        <td class="s0">Prediction score</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">1</td>
+        <td class="s2">TeleAI</td>
+        <td class="s1">0.89</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">2</td>
+        <td class="s4">AsymVerify</td>
+        <td class="s3">0.85</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">3</td>
+        <td class="s2">CSE-UOI</td>
+        <td class="s1">0.85</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">4</td>
+        <td class="s4">Rasende Rakete</td>
+        <td class="s3">0.83</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">5</td>
+        <td class="s2">Evaluators</td>
+        <td class="s1">0.83</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">6</td>
+        <td class="s4">YNU-HPCC</td>
+        <td class="s3">0.83</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">7</td>
+        <td class="s2">moswisarut</td>
+        <td class="s1">0.82</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">8</td>
+        <td class="s4">tahamunawar</td>
+        <td class="s3">0.81</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">9</td>
+        <td class="s2">CLaC @ CLARITY</td>
+        <td class="s1">0.8</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">10</td>
+        <td class="s4">SpinDetector</td>
+        <td class="s3">0.8</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">11</td>
+        <td class="s2">gabriel_stefan</td>
+        <td class="s1">0.8</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">12</td>
+        <td class="s4">AGAI</td>
+        <td class="s3">0.79</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">13</td>
+        <td class="s2">ttda704</td>
+        <td class="s1">0.79</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">14</td>
+        <td class="s4">silkpeak</td>
+        <td class="s3">0.76</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">15</td>
+        <td class="s2">CUET_823</td>
+        <td class="s1">0.76</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">16</td>
+        <td class="s4">aset_clarity</td>
+        <td class="s3">0.76</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">17</td>
+        <td class="s2">goru18</td>
+        <td class="s1">0.76</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">18</td>
+        <td class="s4">taleef</td>
+        <td class="s3">0.76</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">19</td>
+        <td class="s2">Shuja</td>
+        <td class="s1">0.76</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">20</td>
+        <td class="s4">argha</td>
+        <td class="s3">0.75</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">21</td>
+        <td class="s2">The Argonauts</td>
+        <td class="s1">0.75</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">22</td>
+        <td class="s4">KCLarity</td>
+        <td class="s3">0.74</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">23</td>
+        <td class="s2">Limit Testing Special Forces</td>
+        <td class="s1">0.74</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">24</td>
+        <td class="s4">SyntaxMind</td>
+        <td class="s3">0.72</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">25</td>
+        <td class="s2">gsdeyson</td>
+        <td class="s1">0.72</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">26</td>
+        <td class="s4">tbernal</td>
+        <td class="s3">0.71</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">27</td>
+        <td class="s2">rafsan</td>
+        <td class="s1">0.68</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">28</td>
+        <td class="s4">viettien</td>
+        <td class="s3">0.68</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">29</td>
+        <td class="s2">mikebeth</td>
+        <td class="s1">0.68</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">30</td>
+        <td class="s4">JeisonJimenez</td>
+        <td class="s3">0.68</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">31</td>
+        <td class="s2">csecudsg</td>
+        <td class="s1">0.67</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">32</td>
+        <td class="s4">jeffreyzhao</td>
+        <td class="s3">0.64</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">33</td>
+        <td class="s2">B&amp;B</td>
+        <td class="s1">0.64</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">34</td>
+        <td class="s4">AI@UMS</td>
+        <td class="s3">0.62</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">35</td>
+        <td class="s2">uir_cis</td>
+        <td class="s1">0.61</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">36</td>
+        <td class="s4">3devs</td>
+        <td class="s3">0.59</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">37</td>
+        <td class="s2">AI@UMS</td>
+        <td class="s1">0.59</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">38</td>
+        <td class="s4">krishna11098</td>
+        <td class="s3">0.43</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">39</td>
+        <td class="s2">Happy frogs</td>
+        <td class="s1">0.42</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s3">40</td>
+        <td class="s4">lakksh</td>
+        <td class="s3">0.31</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s1">41</td>
+        <td class="s2">yx-ym</td>
+        <td class="s1">0.28</td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="task-2" class="tab-content">
+    <div class="table-wrapper">
+      <div class="ritz grid-container" dir="ltr">
+  <table class="waffle" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr style="height: 20px">
+        <td class="s10" dir="ltr">Rank</td>
+        <td class="s10">Participant</td>
+        <td class="s10">Prediction score</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">1</td>
+        <td class="s12">TeleAI</td>
+        <td class="s11">0.68</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">2</td>
+        <td class="s14">moswisarut</td>
+        <td class="s13">0.61</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">3</td>
+        <td class="s12">CLaC @ CLARITY</td>
+        <td class="s11">0.59</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">4</td>
+        <td class="s14">Rasende Rakete</td>
+        <td class="s13">0.59</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">5</td>
+        <td class="s12">YNU-HPCC</td>
+        <td class="s11">0.59</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">6</td>
+        <td class="s14">pressprexx</td>
+        <td class="s13">0.58</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">7</td>
+        <td class="s12">CSE-UOI</td>
+        <td class="s11">0.58</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">8</td>
+        <td class="s14">ttda704</td>
+        <td class="s13">0.56</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">9</td>
+        <td class="s12">Evaluators</td>
+        <td class="s11">0.54</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">10</td>
+        <td class="s14">gsdeyson</td>
+        <td class="s13">0.52</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">11</td>
+        <td class="s12">gabriel_stefan</td>
+        <td class="s11">0.51</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">12</td>
+        <td class="s14">taleef</td>
+        <td class="s13">0.5</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">13</td>
+        <td class="s12">KCLarity</td>
+        <td class="s11">0.5</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">14</td>
+        <td class="s14">AI@UMS</td>
+        <td class="s13">0.48</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">15</td>
+        <td class="s12">JeisonJimenez</td>
+        <td class="s11">0.47</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">16</td>
+        <td class="s14">uir_cis</td>
+        <td class="s13">0.47</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">17</td>
+        <td class="s12">tahamunawar</td>
+        <td class="s11">0.45</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">18</td>
+        <td class="s14">aliraza1245</td>
+        <td class="s13">0.45</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">19</td>
+        <td class="s12">3devs</td>
+        <td class="s11">0.44</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">20</td>
+        <td class="s14">arsalaaan</td>
+        <td class="s13">0.43</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">21</td>
+        <td class="s12">danhle32</td>
+        <td class="s11">0.43</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">22</td>
+        <td class="s14">The Argonauts</td>
+        <td class="s13">0.42</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">23</td>
+        <td class="s12">sammywal</td>
+        <td class="s11">0.42</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">24</td>
+        <td class="s14">aliraza4353</td>
+        <td class="s13">0.41</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">25</td>
+        <td class="s12 softmerge">
+          <div class="s1oftmerge-inner" style="width:249px;left:-1px">FER- Akrap-Bilic-Cuturilo-Racic-Simpraga</div>
+        </td>
+        <td class="s11">0.4</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">26</td>
+        <td class="s14">viettien</td>
+        <td class="s13">0.39</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">27</td>
+        <td class="s12">fridlowski</td>
+        <td class="s11">0.39</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">28</td>
+        <td class="s14">saifsaif</td>
+        <td class="s13">0.34</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">29</td>
+        <td class="s12">lakksh</td>
+        <td class="s11">0.33</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">30</td>
+        <td class="s14">Shuja</td>
+        <td class="s13">0.29</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">31</td>
+        <td class="s12">ziaulrehman43</td>
+        <td class="s11">0.28</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s13">32</td>
+        <td class="s14">krishna11098</td>
+        <td class="s13">0.25</td>
+      </tr>
+      <tr style="height: 20px">
+        <td class="s11">33</td>
+        <td class="s12">yx-ym</td>
+        <td class="s11">0.13</td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+  .ritz .waffle .s10 {
+    background-color: #e06666;
+    text-align: center;
+    font-weight: bold;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+  }
+
+  .ritz .waffle .s11 {
+    background-color: #ffffff;
+    text-align: center;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+    min-width: 100px;
+  }
+
+  .ritz .waffle .s13 {
+    background-color: #ffe2e2;
+    text-align: center;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+  }
+
+  .ritz .waffle .s14 {
+    background-color: #ffe2e2;
+    text-align: left;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+  }
+
+  .ritz .waffle .s12 {
+    background-color: #ffffff;
+    text-align: left;
+    color: #000000;
+    font-family: Arial;
+    font-size: 12pt;
+    vertical-align: bottom;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 2px 3px 2px 3px;
+    width: 100%;
+  }
+</style>
+
+<script>
+  function openTab(evt, tabName) {
+    // Hide all tab contents
+    var tabContents = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabContents.length; i++) {
+      tabContents[i].classList.remove("active");
+    }
+
+    // Remove active class from all tab buttons
+    var tabButtons = document.getElementsByClassName("tab-button");
+    for (var i = 0; i < tabButtons.length; i++) {
+      tabButtons[i].classList.remove("active");
+    }
+
+    // Show the selected tab content and mark button as active
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+  }
+</script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End youtube video -->
+
+  <!-- Updates -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <!-- Paper video. -->
         <h2 class="title is-3" style="text-align: center;" id="timeline">Timeline</h2>
         <div class="columns is-centered has-text-centered">
           <div class="column is-three-fifths">
             <ul style="text-align: left; list-style-type: disc; padding: 10px;">
               <li style="padding: 3px;"><s>July 15, 2025: Sample and Training data ready</s></li>
               <li style="padding: 3px;"><s>July 31, 2025: Task announced in ACL-2025 Vienna</s></li>
-              <li style="padding: 3px;">January 10, 2026: Evaluation start Task 1</li>
-              <li style="padding: 3px;">January 20, 2026: Evaluation end Task 1</li>
-              <li style="padding: 3px;">January 21, 2026: Evaluation start Task 2</li>
-              <li style="padding: 3px;">January 31, 2026: Evaluation end Task 2</li>
-              <li style="padding: 3px;">February 2026: Paper submission due</li>
-              <li style="padding: 3px;">March 2026: Notification to authors</li>
-              <li style="padding: 3px;">April 2026: Camera ready due</li>
-              <li style="padding: 3px;">Summer 2026: SemEval workshop</li>
+              <li style="padding: 3px;"><s>January 10, 2026: Evaluation start Task 1</s></li>
+              <li style="padding: 3px;"><s>January 20, 2026: Evaluation end Task 1</s></li>
+              <li style="padding: 3px;"><s>January 21, 2026: Evaluation start Task 2</s></li>
+              <li style="padding: 3px;"><s>January 31, 2026: Evaluation end Task 2</s></li>
+              <li style="padding: 3px;">March 2, 2026: Paper submission due</li>
+              <li style="padding: 3px;">April 9, 2026: Notification to authors</li>
+              <li style="padding: 3px;">April 30, 2026: Camera ready due</li>
+              <li style="padding: 3px;">SemEval workshop July (co-located with ACL 2026)</li>
             </ul>
           </div>
         </div>
