@@ -98,13 +98,47 @@ def resolve_rationale_csv(folder: Path, default_path: Path) -> Path:
     return best_path if best_rows > default_rows else default_path
 
 
-def load_rationale_csv(csv_path: Path) -> pd.DataFrame:
-    """Load rationale CSV and filter to rows with valid reasoning and verdict_match."""
+def load_rationale_csv(csv_path: Path, include_corrected: bool = True) -> pd.DataFrame:
+    """Load rationale CSV and filter to rows with valid reasoning.
+    
+    Args:
+        csv_path: Path to the rationale CSV file.
+        include_corrected: If True, include rows where correction_applied=True (hard cases
+            that got corrected). These are valuable training signal as they teach the model
+            to recognize and fix mistakes. Default: True.
+    
+    Returns:
+        DataFrame with filtered rows ready for training.
+    """
     df = pd.read_csv(csv_path)
     # verdict_match can be string "True"/"False" or bool
     df["verdict_match"] = df["verdict_match"].astype(str).str.lower().eq("true")
-    df = df[df["verdict_match"]]
-    df = df[df["initial_reasoning"].notna() & (df["initial_reasoning"].astype(str).str.len() > 0)]
+    
+    # Include: verdict_match=True OR (correction_applied=True with corrective_reasoning)
+    if include_corrected and "correction_applied" in df.columns:
+        df["correction_applied"] = df["correction_applied"].astype(str).str.lower().eq("true")
+        # Hard cases: correction was applied and corrective reasoning exists
+        has_correction = (
+            df["correction_applied"] &
+            df["corrective_reasoning"].notna() &
+            (df["corrective_reasoning"].astype(str).str.len() > 0)
+        )
+        # Keep: matched OR corrected
+        keep_mask = df["verdict_match"] | has_correction
+        df = df[keep_mask]
+        n_corrected = int(has_correction.sum())
+        if n_corrected > 0:
+            print(f"  Including {n_corrected} corrected (hard case) rows in training")
+    else:
+        df = df[df["verdict_match"]]
+    
+    # Must have some reasoning (initial or corrective)
+    has_reasoning = (
+        (df["initial_reasoning"].notna() & (df["initial_reasoning"].astype(str).str.len() > 0)) |
+        (df.get("corrective_reasoning", pd.Series([""])).notna() & 
+         (df.get("corrective_reasoning", pd.Series([""])).astype(str).str.len() > 0))
+    )
+    df = df[has_reasoning]
     df["final_verdict"] = df["final_verdict"].fillna(df["initial_verdict"]).fillna(df["clarity_label"])
     return df
 
@@ -170,13 +204,23 @@ def row_to_clarity_label(row: pd.Series) -> str:
 
 
 def build_assistant_output(row: pd.Series) -> str:
-    """Build target assistant output: JSON with reasoning and label."""
-    reasoning = str(row.get("initial_reasoning") or "").strip()
+    """Build target assistant output: JSON with reasoning and label.
+    
+    For hard cases (correction_applied=True), we use the corrective reasoning
+    as the primary reasoning since it represents the correct analysis that
+    led to the right answer. This teaches the model to reason correctly.
+    """
+    initial = str(row.get("initial_reasoning") or "").strip()
+    corrective = str(row.get("corrective_reasoning") or "").strip()
     correction = row.get("correction_applied")
-    if correction in (True, "True", "true", "1", 1):
-        corrective = str(row.get("corrective_reasoning") or "").strip()
-        if corrective:
-            reasoning = reasoning + "\n\n[Correction]\n" + corrective
+    
+    # For hard cases, use corrective reasoning as primary (it's the correct analysis)
+    if correction in (True, "True", "true", "1", 1) and corrective:
+        # Use corrective reasoning as the main reasoning, with a note about the correction
+        reasoning = f"[Self-corrected analysis]\n{corrective}"
+    else:
+        reasoning = initial
+    
     label = row_to_clarity_label(row)
     return json.dumps({"reasoning": reasoning, "label": label}, ensure_ascii=False)
 
@@ -666,6 +710,39 @@ def main():
     parser.add_argument("--load-8bit", action="store_true", help="Load model in 8-bit (bitsandbytes) to save memory")
     parser.add_argument("--eval", action="store_true", help="Run pre- and post-training evaluation (default: fast, 12 examples 1 sample)")
     parser.add_argument("--full-eval", action="store_true", help="Use full eval (60 examples, 3-sample voting); only with --eval")
+    parser.add_argument("--resume", action="store_true", help="Resume training from latest checkpoint in output_dir (auto-detects if checkpoints exist)")
+    parser.add_argument("--resume-from", type=str, default=None, help="Resume from specific checkpoint path (overrides --resume auto-detection)")
+    parser.add_argument(
+        "--include-corrections",
+        action="store_true",
+        default=True,
+        help="Include rows where correction_applied=True (hard cases with corrective reasoning) in training (default: True)",
+    )
+    parser.add_argument(
+        "--no-include-corrections",
+        action="store_false",
+        dest="include_corrections",
+        help="Exclude corrected rows, only train on initially matched examples",
+    )
+    parser.add_argument(
+        "--validation-split",
+        type=float,
+        default=0.0,
+        help="Fraction of training data to hold out for validation (0.0 = no split, use full data for training). "
+             "When > 0, enables proper train/val monitoring during training.",
+    )
+    parser.add_argument(
+        "--save-eval-errors",
+        action="store_true",
+        default=True,
+        help="Save misclassified examples from evaluation to JSON for hard example mining (default: True)",
+    )
+    parser.add_argument(
+        "--hard-examples-json",
+        type=str,
+        default=None,
+        help="Path to JSON file with hard examples to include in training (output from previous --save-eval-errors)",
+    )
     args = parser.parse_args()
 
     if args.length_profile != "custom":
@@ -677,7 +754,9 @@ def main():
         f"drop_zero_supervision={args.drop_zero_supervision}, "
         f"min_supervised_tokens={args.min_supervised_tokens}, "
         f"drop_conflicting_qa={args.drop_conflicting_qa}, "
-        f"balance_rationale={args.balance_rationale}",
+        f"balance_rationale={args.balance_rationale}, "
+        f"include_corrections={args.include_corrections}, "
+        f"validation_split={args.validation_split}",
         flush=True,
     )
 
@@ -778,12 +857,37 @@ def main():
         print("Gradient checkpointing disabled with 8-bit to avoid bitsandbytes errors on this device.", flush=True)
 
     # Load rationale CSV
-    df = load_rationale_csv(Path(args.rationale_csv))
+    df = load_rationale_csv(Path(args.rationale_csv), include_corrected=args.include_corrections)
     preprocessing_summary: Dict[str, Any] = {
         "source_csv": str(args.rationale_csv),
+        "include_corrections": args.include_corrections,
         "rows_after_base_filters": int(len(df)),
     }
-    print(f"Loaded {len(df)} rationale rows with verdict_match=True")
+    print(f"Loaded {len(df)} rationale rows (include_corrections={args.include_corrections})")
+    
+    # Load hard examples from JSON (from previous eval_errors_for_hard_mining.json)
+    if args.hard_examples_json and Path(args.hard_examples_json).exists():
+        hard_examples = json.loads(Path(args.hard_examples_json).read_text(encoding="utf-8"))
+        hard_df_rows = []
+        for ex in hard_examples:
+            hard_df_rows.append({
+                "interview_question": ex.get("interview_question", ""),
+                "interview_answer": ex.get("interview_answer", ""),
+                "clarity_label": ex.get("clarity_label", ""),
+                "verdict_match": True,  # We're treating these as training targets
+                "initial_reasoning": f"[Hard example from previous evaluation] Model predicted {ex.get('model_prediction', 'unknown')}, but correct label is {ex.get('clarity_label', 'unknown')}.",
+                "initial_verdict": ex.get("clarity_label", ""),
+                "final_verdict": ex.get("clarity_label", ""),
+                "correction_applied": False,
+                "corrective_reasoning": "",
+            })
+        if hard_df_rows:
+            hard_df = pd.DataFrame(hard_df_rows)
+            df = pd.concat([df, hard_df], ignore_index=True)
+            print(f"Added {len(hard_df_rows)} hard examples from {args.hard_examples_json}")
+            preprocessing_summary["hard_examples_added"] = len(hard_df_rows)
+            preprocessing_summary["hard_examples_source"] = str(args.hard_examples_json)
+    
     print(f"Mapped-label distribution (raw filtered): {dict(Counter(df.apply(row_to_clarity_label, axis=1).tolist()))}")
     preprocessing_summary["mapped_distribution_after_base_filters"] = dict(
         Counter(df.apply(row_to_clarity_label, axis=1).tolist())
@@ -846,6 +950,23 @@ def main():
             "Try increasing --max-length or using --keep-zero-supervision."
         )
 
+    # Train/validation split if requested
+    val_examples = []
+    if args.validation_split > 0:
+        n_total = len(train_examples)
+        n_val = max(1, int(n_total * args.validation_split))
+        n_train = n_total - n_val
+        
+        # Shuffle and split
+        random.shuffle(train_examples)
+        val_examples = train_examples[n_train:]
+        train_examples = train_examples[:n_train]
+        
+        print(f"Train/validation split: {n_train} train, {n_val} validation (split={args.validation_split})")
+        preprocessing_summary["validation_split"] = args.validation_split
+        preprocessing_summary["train_examples"] = n_train
+        preprocessing_summary["val_examples"] = n_val
+
     out_path = Path(args.output_dir)
     out_path.mkdir(parents=True, exist_ok=True)
     (out_path / "training_data_stats.json").write_text(
@@ -859,6 +980,8 @@ def main():
                     "drop_conflicting_qa": args.drop_conflicting_qa,
                     "balance_rationale": args.balance_rationale,
                     "few_shot": args.few_shot,
+                    "validation_split": args.validation_split,
+                    "include_corrections": args.include_corrections,
                 },
                 "preprocessing_summary": preprocessing_summary,
                 "tokenization_summary": train_stats,
@@ -869,10 +992,11 @@ def main():
     print(f"Saved training data stats to: {out_path / 'training_data_stats.json'}")
 
     train_dataset = Dataset.from_list(train_examples)
+    val_dataset = Dataset.from_list(val_examples) if val_examples else None
 
-    # Eval set from QEvasion
+    # Eval set from QEvasion (for final evaluation, separate from validation)
     eval_examples = load_eval_data_from_qevasion(split=EVAL_SPLIT_NAME, max_per_label=args.max_eval // 3)
-    print(f"Eval examples: {len(eval_examples)}")
+    print(f"Eval examples (QEvasion test): {len(eval_examples)}")
 
     # Custom collator: pad batch and preserve our labels (loss only on assistant tokens)
     def _collate_fn(examples):
@@ -883,22 +1007,39 @@ def main():
         }
         return batch
 
+    # Disable fp16 when using 8-bit quantization (bitsandbytes uses its own dtype handling)
+    use_fp16 = is_cuda() and not use_8bit
+    
+    # Enable evaluation during training if we have a validation set
+    eval_strategy = "steps" if val_dataset is not None else "no"
+    eval_steps_value = args.eval_steps if val_dataset is not None else None
+    
     training_args = TrainingArguments(
         output_dir=args.output_dir,
         num_train_epochs=args.epochs,
         per_device_train_batch_size=args.batch_size,
+        per_device_eval_batch_size=args.batch_size,
         gradient_accumulation_steps=getattr(args, "gradient_accumulation_steps", 2),
         learning_rate=args.lr,
+        max_grad_norm=1.0,  # Clip gradients to prevent NaN/explosion (especially with 8-bit)
         logging_steps=10,
-        eval_strategy="no",
+        eval_strategy=eval_strategy,
+        eval_steps=eval_steps_value,
         save_steps=args.save_steps,
         save_total_limit=2,
-        fp16=is_cuda(),
+        load_best_model_at_end=val_dataset is not None,  # Load best model based on validation loss
+        metric_for_best_model="eval_loss" if val_dataset is not None else None,
+        greater_is_better=False if val_dataset is not None else None,
+        fp16=use_fp16,
         bf16=is_tpu(),
         report_to="none",
         dataloader_num_workers=0,
         dataloader_pin_memory=False,
     )
+    if use_8bit and not use_fp16:
+        print("fp16 disabled with 8-bit quantization (bitsandbytes handles dtype internally).", flush=True)
+    if val_dataset is not None:
+        print(f"Validation during training enabled: eval every {args.eval_steps} steps, load_best_model_at_end=True", flush=True)
 
     do_eval = getattr(args, "eval", False) or getattr(args, "full_eval", False)
     fast_eval = do_eval and not getattr(args, "full_eval", False)
@@ -914,26 +1055,75 @@ def main():
         model=model,
         args=training_args,
         train_dataset=train_dataset,
+        eval_dataset=val_dataset,  # Use validation set for loss monitoring during training
         data_collator=_collate_fn,
         callbacks=callbacks,
     )
 
-    if do_eval:
+    # Resume from checkpoint if requested or if checkpoints exist
+    resume_from_checkpoint = None
+    if args.resume_from:
+        resume_from_checkpoint = args.resume_from
+        print(f"Resuming from specified checkpoint: {resume_from_checkpoint}", flush=True)
+    elif args.resume or getattr(args, "resume", False):
+        # Auto-detect latest checkpoint in output_dir
+        output_path = Path(args.output_dir)
+        checkpoint_dirs = sorted(
+            [d for d in output_path.glob("checkpoint-*") if d.is_dir()],
+            key=lambda x: int(x.name.split("-")[1]) if x.name.split("-")[1].isdigit() else 0,
+            reverse=True,
+        )
+        if checkpoint_dirs:
+            resume_from_checkpoint = str(checkpoint_dirs[0])
+            print(f"Auto-detected latest checkpoint: {resume_from_checkpoint}", flush=True)
+            # Verify checkpoint is complete (has training_state.json or trainer_state.json)
+            state_files = list(checkpoint_dirs[0].glob("trainer_state.json")) + list(checkpoint_dirs[0].glob("training_state.json"))
+            if not state_files:
+                print(f"Warning: Checkpoint {resume_from_checkpoint} may be incomplete (no state file). Attempting resume anyway...", flush=True)
+        elif args.resume:
+            print("Warning: --resume specified but no checkpoints found in output_dir. Starting fresh training.", flush=True)
+
+    if do_eval and not resume_from_checkpoint:
         print("Pre-training evaluation...", flush=True)
         acc_before, f1_before, _, _ = evaluate_with_voting(model, tokenizer, eval_examples_to_use, num_samples=eval_num_samples)
         print(f"Before training: accuracy={acc_before:.4f}, macro_f1={f1_before:.4f}")
 
-    trainer.train()
+    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
 
     if do_eval:
         print("Post-training evaluation...", flush=True)
         acc_after, f1_after, preds, gold = evaluate_with_voting(model, tokenizer, eval_examples_to_use, num_samples=eval_num_samples)
         print(f"After training: accuracy={acc_after:.4f}, macro_f1={f1_after:.4f}")
+        
+        # Save evaluation errors for hard example mining (next training iteration)
+        if getattr(args, "save_eval_errors", True):
+            eval_errors = []
+            for ex, pred, true_label in zip(eval_examples_to_use, preds, gold):
+                if pred != true_label:
+                    eval_errors.append({
+                        "interview_question": ex["question"],
+                        "interview_answer": ex["answer"],
+                        "clarity_label": true_label,
+                        "model_prediction": pred,
+                        "error_type": "misclassification",
+                    })
+            errors_path = Path(args.output_dir) / "eval_errors_for_hard_mining.json"
+            errors_path.write_text(json.dumps(eval_errors, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(f"Saved {len(eval_errors)} evaluation errors to: {errors_path}")
+            print("  -> Use this file with --hard-examples-json in next training run, or")
+            print("  -> Run rationale generation on these examples to create hard training data")
 
+    # Save model (Trainer.save_model doesn't accept safe_serialization; model.save_pretrained does)
     try:
-        trainer.save_model(args.output_dir, safe_serialization=True)
-    except TypeError:
         trainer.save_model(args.output_dir)
+    except Exception as e:
+        print(f"Warning: Failed to save model via Trainer.save_model: {e}", flush=True)
+        print("Attempting direct model.save_pretrained...", flush=True)
+        try:
+            model.save_pretrained(args.output_dir, safe_serialization=True)
+        except Exception as e2:
+            print(f"Warning: Direct save also failed: {e2}", flush=True)
+            print("Model may contain NaN/inf values. Training may have failed.", flush=True)
     try:
         tokenizer.save_pretrained(args.output_dir, safe_serialization=True)
     except TypeError:
