@@ -16,10 +16,13 @@ from typing import Dict
 import pandas as pd
 
 
-DEFAULT_INPUT = Path("/Users/andrearachetta/Desktop/qevasion_rationale/qevasion_rationale_dataset_20260204_163024.csv")
 REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_INPUT = REPO_ROOT / "qevasion_rationale" / "qevasion_rationale_raw.csv"
 DEFAULT_OUTPUT = REPO_ROOT / "reports_acl_submission" / "rationale_dataset_audit"
-DEFAULT_TOKENIZER = REPO_ROOT / "granite_clarity_finetuned"
+
+# Tokenizer: use local finetuned if available, else fallback to HuggingFace model
+_LOCAL_TOKENIZER = REPO_ROOT / "granite_clarity_finetuned"
+DEFAULT_TOKENIZER = str(_LOCAL_TOKENIZER) if _LOCAL_TOKENIZER.exists() else "ibm-granite/granite-3.2-2b-instruct"
 
 LABEL_MAP = {
     "Clear Reply": "Direct Reply",
@@ -68,7 +71,11 @@ def add_token_supervision_audit(
 ) -> pd.DataFrame:
     from transformers import AutoTokenizer
 
-    tokenizer = AutoTokenizer.from_pretrained(str(tokenizer_path), local_files_only=True)
+    tokenizer_str = str(tokenizer_path)
+    # Try local first, then remote
+    is_local = Path(tokenizer_str).exists()
+    print(f"  Loading tokenizer: {tokenizer_str} (local={is_local})")
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_str, local_files_only=is_local)
     sanity = tokenizer("sanity", return_tensors="pt")["input_ids"]
     if int(sanity.shape[-1]) == 0:
         raise RuntimeError(f"Tokenizer from {tokenizer_path} tokenizes to empty inputs.")
