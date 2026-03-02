@@ -31,8 +31,24 @@ if str(REPO_ROOT) not in sys.path:
 # ---------------------------------------------------------------------------
 # Fixed paths — QEvasion test set (308)
 # ---------------------------------------------------------------------------
-# Primary: RoBERTa predictions CSV from clear-non-reply notebook (also serves as eval data source)
-ROBERTA_PREDICTIONS_CSV = REPO_ROOT / "clear-non-reply-predictions-roberta.csv"
+# Search paths for RoBERTa predictions CSV (Kaggle, Colab, local)
+ROBERTA_CSV_CANDIDATES = [
+    REPO_ROOT / "clear-non-reply-predictions-roberta.csv",
+    Path("/kaggle/input/clear-non-reply-preds/clear-non-reply-predictions-roberta.csv"),
+    Path("/kaggle/input/roberta-predictions/clear-non-reply-predictions-roberta.csv"),
+    Path("/kaggle/working/clear-non-reply-predictions-roberta.csv"),
+    Path("/content/clear-non-reply-predictions-roberta.csv"),
+]
+
+def find_roberta_csv() -> Path:
+    """Find RoBERTa predictions CSV from candidate paths."""
+    for p in ROBERTA_CSV_CANDIDATES:
+        if p.exists():
+            return p
+    return ROBERTA_CSV_CANDIDATES[0]  # fallback for error message
+
+ROBERTA_PREDICTIONS_CSV = find_roberta_csv()
+
 # Fallback eval CSV (SemEval 237)
 SEMEVAL_CSV = REPO_ROOT / "dataset" / "clarity_task_evaluation_dataset.csv"
 
@@ -40,8 +56,26 @@ ROBERTA_MODEL_DIR = REPO_ROOT / "evasion_binary_roberta_2"
 
 # Granite predictions for QEvasion (separate from SemEval granite_answers.txt)
 GRANITE_QEVASION_LOG = REPO_ROOT / "granite_qevasion_predictions.txt"
-GRANITE_ADAPTER_DIR = REPO_ROOT / "checkpoint64"
 GRANITE_BASE_MODEL = "ibm-granite/granite-3.2-8b-instruct"
+
+# Search paths for Granite checkpoint (Kaggle, Colab, local)
+GRANITE_ADAPTER_CANDIDATES = [
+    REPO_ROOT / "checkpoint64",
+    Path("/kaggle/input/granite-checkpoint64"),
+    Path("/kaggle/input/checkpoint64"),
+    Path("/kaggle/input/granite-lora-checkpoint"),
+    Path("/kaggle/working/checkpoint64"),
+    Path("/content/checkpoint64"),
+]
+
+def find_granite_adapter() -> Path:
+    """Find Granite adapter directory from candidate paths."""
+    for p in GRANITE_ADAPTER_CANDIDATES:
+        if p.exists() and (p / "adapter_model.safetensors").exists():
+            return p
+    return GRANITE_ADAPTER_CANDIDATES[0]  # fallback for error message
+
+GRANITE_ADAPTER_DIR = find_granite_adapter()
 
 OUT_JSON = REPO_ROOT / "results" / "ensemble_qevasion_metrics.json"
 
