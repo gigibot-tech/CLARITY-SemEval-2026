@@ -1,40 +1,46 @@
-# CLARITY - Unmasking Political Question Evasions.
+# CLARITY - Unmasking Political Question Evasions
 
 [![Paper Status](https://img.shields.io/badge/EMNLP%202024-Accepted-brightgreen)](https://example.com/link-to-paper)
-[![arXiv](https://img.shields.io/badge/arXiv-2409.13879-b31b1b)]([https://arxiv.org/abs/2409.13879](https://arxiv.org/abs/2409.13879))
+[![arXiv](https://img.shields.io/badge/arXiv-2409.13879-b31b1b)](https://arxiv.org/abs/2409.13879)
 
 ![alt text](https://github.com/konstantinosftw/CLARITY-SemEval-2026/blob/main/logo.jpg?raw=true)
 
+This repository provides resources for **detecting and classifying response clarity in political interviews** (taxonomy, dataset, baselines). The [paper](https://arxiv.org/abs/2409.13879) and [dataset (QEvasion)](https://huggingface.co/datasets/ailsntua/QEvasion) are from the original CLARITY work.
 
-This repository provides resources for **detecting and classifying response clarity in political interviews**, introducing:
+---
 
-- A **novel taxonomy** for categorizing response clarity and evasion techniques.
-- An annotated **dataset of question-answer pairs** from political interviews.
-- Baseline models and experiments establishing new benchmarks for this task.
+## SemEval-2026 submission (our workflow)
 
+We address the **SemEval 2026 CLARITY task** with a different execution path than the paper baselines:
 
-The paper is available on [arXiv](https://arxiv.org/abs/2409.13879).
+- **Task:** 3-class clarity (Direct Reply, Direct Non-Reply, Indirect) on QEvasion / SemEval gold.
+- **Our pipeline:** RoBERTa binary (DNR vs rest) + Granite 3.2 8B (3-class with LoRA), combined via a fusion rule (`sum_both_balanced_v4`).
+- **Reference Kaggle notebook (Granite training only):** [`granite-training-only`](https://www.kaggle.com/code/gigibot/granite-training-only/notebook)
+- **Single-command eval (no flags):** run from repo root:
+  ```bash
+  pip install -r requirements.txt  # or: transformers datasets peft pandas scikit-learn
+  python scripts/run_ensemble_validation.py
+  ```
+  Uses `clear-non-reply-predictions-roberta.csv` as input; if Granite predictions are missing, runs inference from the checkpoint.
+- **Kaggle:** Use `kaggle_ensemble_evaluation.ipynb` — clone repo, attach datasets (RoBERTa predictions CSV + Granite checkpoint), run all cells. See the notebook for required input dataset names.
 
-The dataset is available on [Hugging Face](https://huggingface.co/datasets/ailsntua/QEvasion). The full code and trained models will be released soon.
+**Results and details:** `README_EXPERIMENTS.md` (folder map, fusion variants, metrics) and `RESULTS.md` (paper-ready tables).
 
+---
 
-## Dataset
+## More on our experiments (local / untracked)
 
-The dataset is publicly available on [Hugging Face Datasets](https://huggingface.co/datasets/ailsntua/QEvasion). It includes annotated QA pairs that can be used for training and evaluating models on the response clarity task.
+Artifacts and fusion variants (RoBERTa/Granite/DeBERTa, rationale generation, etc.) are documented in `README_EXPERIMENTS.md`: folder map, run commands, and where metrics are saved. Key numbers are in `RESULTS.md`. Many result files live under `results/` and are gitignored.
 
-## Code and Models
+---
 
-There are two folders: one contains the dataset in its raw format, and the other contains the classification results produced by all the models presented in the paper. The [Hugging Face Datasets](https://huggingface.co/datasets/ailsntua/QEvasion) version of the dataset is pre-processed and regularly updated — we encourage users to follow the latest Hugging Face structure for consistency, although the training and testing code has been built to work with the raw format.
+## Original CLARITY paper: dataset and baselines
 
-The dataset folder includes the following files:
+The following describes the **upstream** dataset and the **paper’s** training/inference (Falcon, LoRA, encoders). Our SemEval submission uses the pipeline above instead.
 
-- QAEvasion.csv: a file containing the dataset.
-- Inter-Annotator Agreement folder: annotations from each annotator for corresponding parts.
-- Counterfactual Summaries folder: counterfactual summaries (and the results of GPT-3.5 Turbo) for each part, along with user annotations.
-  
+**Dataset:** [Hugging Face QEvasion](https://huggingface.co/datasets/ailsntua/QEvasion) — annotated QA pairs. The repo’s dataset folder may contain raw format, Inter-Annotator Agreement, and Counterfactual Summaries; we use the Hugging Face version for our runs.
 
-### Installation
-- pip install -r requirements.txt
+**Installation:** `pip install -r requirements.txt`
 
 ### 1. Dataset Analysis
 

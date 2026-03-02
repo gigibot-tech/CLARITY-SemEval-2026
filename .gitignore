@@ -60,9 +60,6 @@ reports_acl_submission/colab_outputs/
 roberta/roberta-ensemble-model-*/
 granite_clarity_finetuned/
 granite_clarity_finetuned_*/
-*.safetensors
-*.bin
-checkpoint-*/
 final_model/
 best_model/
 merged_full_model/
@@ -91,3 +88,5 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+reports_acl_submission/*
