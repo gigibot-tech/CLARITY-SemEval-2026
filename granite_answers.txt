@@ -1,0 +1,255 @@
+
+📏 Alignment OK: 237 samples (index 0..236)
+Gold label distribution: {'Direct Reply': 85, 'Direct Non-Reply': 35, 'Indirect': 117}
+[001/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=208
+[002/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=264
+[003/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=260
+[004/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=278
+[005/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=280
+[006/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=209
+[007/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=283
+[008/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=247
+[009/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=246
+[010/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=235
+[011/237] True=Direct Reply | Pred=Indirect | ❌ | votes={'Indirect': 3} | max_toks=300
+[012/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=195
+[013/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=201
+[014/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=208
+[015/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=187
+[016/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=216
+[017/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 3} | max_toks=261
+[018/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=231
+[019/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Reply': 1} | max_toks=300
+[020/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=300
+[021/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=300
+[022/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=212
+[023/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=240
+[024/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=232
+[025/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=268
+[026/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=295
+[027/237] True=Indirect | Pred=Indirect | ✅ | votes={'Direct Reply': 1, 'Indirect': 2} | max_toks=230
+[028/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=225
+[029/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=218
+[030/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=229
+[031/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=262
+[032/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=212
+[033/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=300
+[034/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=285
+[035/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=186
+[036/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=200
+[037/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Indirect': 1, 'Direct Reply': 2} | max_toks=300
+[038/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=242
+[039/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 1, 'Indirect': 1} | max_toks=244
+[040/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=243
+[041/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=287
+[042/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=167
+[043/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=214
+[044/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=246
+[045/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=258
+[046/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=209
+[047/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=214
+[048/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=113
+[049/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=225
+[050/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=254
+[051/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=252
+[052/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=249
+[053/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 1, 'Indirect': 1} | max_toks=190
+[054/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=203
+[055/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=300
+[056/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=230
+[057/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 1, 'Indirect': 1} | max_toks=205
+[058/237] True=Direct Reply | Pred=Indirect | ❌ | votes={'Indirect': 3} | max_toks=300
+[059/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Indirect': 1, 'Direct Reply': 2} | max_toks=300
+[060/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=219
+[061/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Indirect': 1, 'Direct Reply': 2} | max_toks=234
+[062/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=288
+[063/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=244
+[064/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=216
+[065/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=254
+[066/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 1, 'Indirect': 1} | max_toks=300
+[067/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 1, 'Indirect': 1} | max_toks=271
+[068/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Indirect': 1, 'Direct Reply': 1} | max_toks=300
+[069/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=255
+[070/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=209
+[071/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=226
+[072/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Indirect': 1, 'Direct Reply': 1} | max_toks=300
+[073/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=246
+[074/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=251
+[075/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=211
+[076/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=300
+[077/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Reply': 1} | max_toks=300
+[078/237] True=Direct Reply | Pred=Indirect | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 1, 'Direct Reply': 1} | max_toks=246
+[079/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Indirect': 1, 'Direct Reply': 2} | max_toks=221
+[080/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=211
+[081/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 1, 'Indirect': 1, 'Direct Non-Reply': 1} | max_toks=242
+[082/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=227
+[083/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=231
+[084/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 1, 'Direct Reply': 1, 'Direct Non-Reply': 1} | max_toks=285
+[085/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=239
+[086/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=273
+[087/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=250
+[088/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=225
+[089/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=182
+[090/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Non-Reply': 1} | max_toks=230
+[091/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=280
+[092/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=235
+[093/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=239
+[094/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Non-Reply': 1} | max_toks=216
+[095/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=300
+[096/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Indirect': 1, 'Direct Reply': 1} | max_toks=156
+[097/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=300
+[098/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=215
+[099/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=209
+[100/237] True=Direct Reply | Pred=Indirect | ❌ | votes={'Direct Reply': 1, 'Indirect': 2} | max_toks=283
+[101/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=276
+[102/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=220
+[103/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=199
+[104/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=258
+[105/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=235
+[106/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=213
+[107/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Non-Reply': 1} | max_toks=260
+[108/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Non-Reply': 1} | max_toks=242
+[109/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=284
+[110/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=220
+[111/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=204
+[112/237] True=Direct Non-Reply | Pred=Indirect | ❌ | votes={'Indirect': 1, 'Direct Reply': 1, 'Direct Non-Reply': 1} | max_toks=263
+[113/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=207
+[114/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=222
+[115/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=254
+[116/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=227
+[117/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=202
+[118/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=257
+[119/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Reply': 1} | max_toks=266
+[120/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=300
+[124/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=218
+[125/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=227
+[126/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=256
+[127/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 1, 'Direct Non-Reply': 1, 'Indirect': 1} | max_toks=186
+[128/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=260
+[129/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=254
+[130/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=241
+[131/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=215
+[132/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=206
+[133/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=293
+[134/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=241
+[135/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=254
+[136/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=249
+[137/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=69
+[138/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=203
+[139/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=267
+[140/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=241
+[141/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=227
+[142/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=186
+[143/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=231
+[144/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=223
+[145/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=206
+[146/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=229
+[147/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=261
+[148/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=148
+[149/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=249
+[150/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=271
+[151/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 1, 'Indirect': 1} | max_toks=265
+[152/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=170
+[153/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=300
+[154/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=225
+[155/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=44
+[156/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=255
+[157/237] True=Direct Reply | Pred=Indirect | ❌ | votes={'Indirect': 2, 'Direct Non-Reply': 1} | max_toks=274
+[158/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=277
+[159/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=242
+[160/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=222
+[161/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 1, 'Indirect': 1} | max_toks=285
+[162/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=201
+[163/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=217
+[164/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=267
+[165/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=198
+[166/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=223
+[167/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=244
+[168/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=248
+[169/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=214
+[170/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=203
+[171/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=263
+[172/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=236
+[173/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=240
+[174/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 3} | max_toks=265
+[175/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=300
+[176/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=254
+[177/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=189
+[178/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=208
+[179/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=243
+[180/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=194
+[181/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=262
+[182/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=298
+[183/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=243
+[184/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=281
+[185/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=243
+[186/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=208
+[187/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=196
+[188/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Indirect': 1, 'Direct Reply': 2} | max_toks=238
+[189/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 2, 'Direct Reply': 1} | max_toks=300
+[190/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=298
+[191/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=196
+[192/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=202
+[193/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=218
+[194/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 3} | max_toks=237
+[195/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Direct Non-Reply': 1} | max_toks=224
+[196/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Indirect': 1, 'Direct Reply': 2} | max_toks=300
+[197/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=216
+[198/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=180
+[199/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=193
+[200/237] True=Indirect | Pred=Indirect | ✅ | votes={'Direct Non-Reply': 1, 'Indirect': 2} | max_toks=222
+[201/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=283
+[202/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=260
+[203/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=240
+[204/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 1, 'Direct Non-Reply': 1, 'Direct Reply': 1} | max_toks=229
+[205/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=250
+[206/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 2} | max_toks=268
+[207/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=240
+[208/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=192
+[209/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=218
+[210/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=231
+[211/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=225
+[212/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=192
+[213/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=232
+[214/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=241
+[215/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=244
+[216/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=214
+[217/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 1, 'Direct Non-Reply': 1, 'Indirect': 1} | max_toks=237
+[218/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=237
+[219/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=257
+[220/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=57
+[221/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=75
+[222/237] True=Direct Non-Reply | Pred=Direct Non-Reply | ✅ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=273
+[223/237] True=Indirect | Pred=Indirect | ✅ | votes={'Indirect': 3} | max_toks=300
+[224/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=219
+[225/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=253
+[226/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Direct Reply': 1} | max_toks=212
+[227/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=261
+[228/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 3} | max_toks=238
+[229/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Non-Reply': 1, 'Direct Reply': 2} | max_toks=230
+[230/237] True=Direct Reply | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=214
+[231/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Direct Non-Reply': 2, 'Indirect': 1} | max_toks=232
+[232/237] True=Direct Reply | Pred=Direct Reply | ✅ | votes={'Direct Reply': 3} | max_toks=223
+[233/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=223
+[234/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=300
+[235/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 2, 'Indirect': 1} | max_toks=300
+[236/237] True=Indirect | Pred=Direct Reply | ❌ | votes={'Direct Reply': 3} | max_toks=300
+[237/237] True=Indirect | Pred=Direct Non-Reply | ❌ | votes={'Indirect': 1, 'Direct Non-Reply': 2} | max_toks=266
+
+🏁 GOLD EVAL Accuracy: 95/237 = 40.1%
+📏 Token usage: p95=300, cap_rate=10.5% (max_new_tokens=300)
+⚠️ More than 10% of samples hit token cap. Consider increasing GOLD_MAX_NEW_TOKENS (e.g., 384 or 512).
+
+Confusion matrix:
+pred              Direct Non-Reply  Direct Reply  Indirect
+true                                                      
+Direct Non-Reply                34             0         1
+Direct Reply                    34            46         5
+Indirect                        71            31        15
+
+💾 Saved: /kaggle/working/granite_lora_trained/gold_eval_predictions.json
+💾 Saved: /kaggle/working/granite_lora_trained/gold_eval_predictions.csv
+💾 Saved: /kaggle/working/granite_lora_trained/gold_eval_confusion_matrix.csv
+
+
+
