@@ -1,47 +1,5 @@
-# Experiment Assets Map (Non-SemEval Baseline)
 
-This file documents artifacts that are **not part of the original tracked SemEval clone** in this workspace.
-
-Baseline definition used here:
-- "SemEval baseline" = files currently tracked by `git ls-files`.
-- "Non-baseline" = currently untracked experiment files/folders you added locally.
-
-## Git Delta (What Changed vs Baseline)
-
-Tracked modifications (visible in `git diff --name-status`):
-- `.gitignore` (expanded ignores for local experiment outputs)
-- `Granite_Rationale_Generation_Colab.ipynb` (Drive-first + safer resume)
-- `clear-non-reply-roberta.ipynb` (local RoBERTa voting + exports)
-- `granite_training_only.ipynb` (training-only Granite workflow changes)
-
-Local additions are intentionally mostly **untracked and/or gitignored** (e.g. `results/`, `reports_acl_submission/`, exported model folders) to keep the SemEval baseline clean.
-
-## Key Results Snapshot (Logged Artifacts)
-
-These are the best numbers currently saved in this workspace (paths below are local and typically gitignored):
-
-| Task | Eval Set | N | Metric | Value | Evidence |
-|---|---|---:|---|---:|---|
-| 3-class (DR/DNR/Indirect), fused ensemble | SemEval gold eval (local) | 234 | macro F1 | 0.4864 | `results/roberta_gold_eval_local/ensemble_validation_metrics.json` |
-| 3-class per-label F1 (same run) | SemEval gold eval (local) | 234 | F1(Direct Reply) | 0.6369 | `results/roberta_gold_eval_local/ensemble_validation_metrics.json` |
-| Binary legacy (Clear Reply vs Not Clear) | legacy eval slice | 200 | macro F1 | 0.5967 | `reports_acl_submission/deberta_legacy_binary_breakdown.json` |
-| Binary legacy per-class F1 (same run) | legacy eval slice | 200 | F1(Clear Reply) | 0.3830 | `reports_acl_submission/deberta_legacy_binary_breakdown.json` |
-| Balanced-69 sanity eval (RoBERTa ensemble) | QEvasion balanced test subset | 69 | macro F1 | 0.1667 | `results/ensemble_balanced69_20260214_151415/metrics.json` |
-| Balanced-69 sanity eval (single model-3) | QEvasion balanced test subset | 69 | macro F1 | 0.3140 | `results/ensemble_balanced69_20260214_151415/model3_only_metrics.json` |
-
-## Ensemble Validation on SemEval Gold (One Run)
-
-Single command, no flags: `python scripts/run_ensemble_validation.py`. Evaluates RoBERTa (binary DNR) + Granite (3-class) on SemEval gold (N=234). Fusion rule: `sum_both_balanced_v4`.
-
-| Model | Macro F1 | F1 (DR) | F1 (DNR) | F1 (Indirect) |
-|-------|----------|---------|----------|---------------|
-| Granite standalone | 0.3929 | 0.5714 | 0.3882 | 0.2190 |
-| RoBERTa standalone | 0.2492 | 0.0000 | 0.1111 | 0.6364 |
-| **Ensemble (sum_both_balanced_v4)** | **0.4864** | **0.6369** | **0.3929** | **0.4294** |
-
-*Source: `results/roberta_gold_eval_local/ensemble_validation_metrics.json`*
-
-### Fusion-rule variants (same gold set)
+### Fusion-rule variants (same gold set) (Gold set => official sent Evaluationset from codebench by the workshop organizer on Discord)
 
 From `scripts/evaluate_roberta_gold_and_merge.py` with different `--fusion-rule`:
 
@@ -87,15 +45,6 @@ Run Granite LoRA checkpoint on balanced 69-sample QEvasion subset:
   --num-samples 1 \
   --temperature 0.0
 ```
-
-**Ensemble validation (SemEval gold or QEvasion test, no flags):**
-
-```bash
-cd /Users/andrearachetta/Desktop/CLARITY-SemEval-2026
-python scripts/run_ensemble_validation.py
-```
-
-Uses `clear-non-reply-predictions-roberta.csv` as data source; if Granite predictions missing, runs inference from `checkpoint64/`.
 
 ## Non-Baseline Top-Level Folders
 

@@ -1,10 +1,5 @@
 # CLARITY - Unmasking Political Question Evasions
 
-[![Paper Status](https://img.shields.io/badge/EMNLP%202024-Accepted-brightgreen)](https://example.com/link-to-paper)
-[![arXiv](https://img.shields.io/badge/arXiv-2409.13879-b31b1b)](https://arxiv.org/abs/2409.13879)
-
-![alt text](https://github.com/konstantinosftw/CLARITY-SemEval-2026/blob/main/logo.jpg?raw=true)
-
 This repository provides resources for **detecting and classifying response clarity in political interviews** (taxonomy, dataset, baselines). The [paper](https://arxiv.org/abs/2409.13879) and [dataset (QEvasion)](https://huggingface.co/datasets/ailsntua/QEvasion) are from the original CLARITY work.
 
 ---
@@ -30,9 +25,14 @@ We address the **SemEval 2026 CLARITY task** with a different execution path tha
 
 ## More on our experiments (local / untracked)
 
-Artifacts and fusion variants (RoBERTa/Granite/DeBERTa, rationale generation, etc.) are documented in `README_EXPERIMENTS.md`: folder map, run commands, and where metrics are saved. Key numbers are in `RESULTS.md`. Many result files live under `results/` and are gitignored.
+Artifacts and fusion variants (RoBERTa/Granite/DeBERTa, rationale generation, etc.) are documented in `README_EXPERIMENTS.md`: folder map, run commands, and where metrics are saved. Key numbers are in `RESULTS.md`. Many result files live under `results/` and are gitignored see `NOT_PUSHED_EXPERIMENTS.md`.
 
 ---
+
+[![Paper Status](https://img.shields.io/badge/EMNLP%202024-Accepted-brightgreen)](https://example.com/link-to-paper)
+[![arXiv](https://img.shields.io/badge/arXiv-2409.13879-b31b1b)](https://arxiv.org/abs/2409.13879)
+
+![alt text](https://github.com/konstantinosftw/CLARITY-SemEval-2026/blob/main/logo.jpg?raw=true)
 
 ## Original CLARITY paper: dataset and baselines
 
@@ -56,25 +56,9 @@ To analyze counterfactual summaries, execute the following command:
 ```
 >>> python counterfactual_summaries_analysis.py
 ```
+...
 
-### 2. Zero-Shot Inference
-#### 2.1 Zero-Shot Inference on Open-source Models
-For the Falcon-40b model (similarly with any other hugging face model):
-```
->>> python zero_shot_.py --model_name "tiiuae/falcon-40b" --output_file "falcon_40b_zero_shot_clarity.pickle"
-```
-```
->>> python zero_shot_.py --model_name "tiiuae/falcon-40b" --output_file "falcon_40b_zero_shot_evasion.pickle" --add_specific_labels
-```
-#### 2.2 Zero-Shot Inference on GPT3.5_turbo
-For direct clarity problem:
-```
->>> python scripts/chatgpt_zero_shot_.py --token ... --output_file "falcon_40b_zero_shot_clarity.pickle" 
-```
-For evasion based clarity problem:
-```
->>> python chatgpt_zero_shot_.py --token ... --output_file "falcon_40b_zero_shot_evasion.pickle" --add_specific_labels
-```
+...
 
 #### 3. Training your own model
 Using lora.py, you can train the model with the following arguments:
@@ -89,26 +73,6 @@ Example commands:
 >>> python lora.py --model_name "tiiuae/falcon-40b" --output_model_dir "falcon_40b_clarity"
 >>> python lora.py --model_name "tiiuae/falcon-40b" --output_model_dir "falcon_40b_clarity"
 ```
-
-or 
-
-```
->>> python lora.py --model_name "tiiuae/falcon-40b" --output_model_dir "falcon_40b_evasion" --add_specific_labels
-```
-The second command will train a models on the evasion based clarity problem (all the labels) instead of the 3 classes of evasion problem only.
-
-Similarly, for training the encoders: 
-```
->>> python encoder_train.py --model_name "roberta-base" --experiment "direct_clarity"
->>> python encoder_train.py --model_name "roberta-base" --experiment "evasion_based_clarity"
-```
-
-and inference: 
-```
->>> python encoder_inference.py --model_name "roberta-base" --experiment "direct_clarity"
->>> python encoder_inference.py --model_name "roberta-base" --experiment "evasion_based_clarity"
-```
-
 
 ### 4. Results Presented in the Paper
 In order to export the results presented in the paper, run the following command:
