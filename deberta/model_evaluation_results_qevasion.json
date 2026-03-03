@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-01-24T15:35:35.803056",
+  "model_path": "./microsoft/deberta-v3-base",
+  "model_name": "microsoft/deberta-v3-base",
+  "threshold": 0.5,
+  "n_examples": 308,
+  "metrics": {
+    "accuracy": 0.4155844155844156,
+    "precision": 0.2651162790697674,
+    "recall": 0.7215189873417721,
+    "f1": 0.3877551020408163,
+    "roc_auc": 0.5401580896578408
+  }
+}

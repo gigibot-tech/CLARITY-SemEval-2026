@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-01-24T15:19:52.231217",
+  "model_path": "./microsoft/deberta-v3-base",
+  "model_name": "microsoft/deberta-v3-base",
+  "threshold": 0.5,
+  "n_examples": 237,
+  "prediction_counts": {
+    "Clear Reply": 126,
+    "Non-Clear / Ambiguous Reply": 111
+  }
+}
