@@ -1,0 +1,26 @@
+{
+  "model_1_train": {
+    "accuracy": 0.5916473317865429,
+    "precision_macro": 0.19721577726218098,
+    "recall_macro": 0.3333333333333333,
+    "f1_macro": 0.2478134110787172
+  },
+  "model_2_train": {
+    "accuracy": 0.5916473317865429,
+    "precision_macro": 0.19721577726218098,
+    "recall_macro": 0.3333333333333333,
+    "f1_macro": 0.2478134110787172
+  },
+  "model_3_train": {
+    "accuracy": 0.3715197215777262,
+    "precision_macro": 0.30737008947496375,
+    "recall_macro": 0.3356097318521832,
+    "f1_macro": 0.2557534457156594
+  },
+  "ensemble_average_train": {
+    "accuracy": 0.5916473317865429,
+    "precision_macro": 0.19721577726218098,
+    "recall_macro": 0.3333333333333333,
+    "f1_macro": 0.2478134110787172
+  }
+}
